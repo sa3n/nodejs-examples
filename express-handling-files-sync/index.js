@@ -32,11 +32,10 @@ app.post('/users', (req, res, next) => {
 
 app.get('/users', (req, res, next) => {
     const users = getUsers(FILE_PATH)
-    let htmlUserList = '<ul>'
-    for (const user of users) {
-        htmlUserList += `<li>${user}</li>`
-    }
-    htmlUserList += '</ul>'
+    const htmlUserListElements = users
+        .map(username => `<li>${username}</li>`)
+        .join('')
+    const htmlUserList = `<ul>${htmlUserListElements}</ul>`
     res.send(htmlUserList)
 })
 
